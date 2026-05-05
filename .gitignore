@@ -1,4 +1,18 @@
+# Ambiente virtual
+.venv/
+
+# Variáveis de ambiente (segredos)
 .env
-.venv
+
+# Banco de dados local
 db.sqlite3
-_pycache_/
+*.sqlite3-shm
+*.sqlite3-wal
+
+# Cache do Python (gerado automaticamente, não deve ir ao Git)
+__pycache__/
+*.pyc
+*.pyo
+
+# Arquivos de configuração local do VS Code (opcional manter)
+.vscode/

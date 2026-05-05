@@ -1,119 +1,309 @@
-# 📚☕🖊️ Sistema de Gestão — Cafeteria, Livraria & Papelaria
+# 🚀 Patas&Páginas
 
-Sistema web desenvolvido com **Django** para gerenciamento integrado de três estabelecimentos: cafeteria, livraria e papelaria. O projeto segue a arquitetura padrão de múltiplos apps do Django, com cada estabelecimento encapsulado em seu próprio módulo independente.
+## 📌 Visão Geral
 
----
+Este projeto consiste em uma aplicação web desenvolvida com o objetivo de gerenciar uma aplicação de cafeteria, livraria e papelaria.
 
-## 🗂️ Estrutura do Projeto
-
-```
-backend/
-├── patas_paginas/          # App principal (core do projeto)
-├── cafeteria/              # App do módulo de cafeteria
-├── livraria/               # App do módulo de livraria
-├── papelaria/              # App do módulo de papelaria
-├── assets/                 # Arquivos estáticos globais
-└── manage.py               # Utilitário de linha de comando do Django
-```
+A aplicação foi projetada com foco em:
+- Escalabilidade
+- Segurança
+- Manutenibilidade
+- Comercialização (produto final vendável)
 
 ---
 
-## 📁 App Principal — `patas_paginas/`
+## 🎯 Objetivo do Projeto
 
-Este é o **coração do projeto**. Criado automaticamente pelo Django ao iniciar o projeto, é responsável pelas configurações globais e pelo roteamento central de toda a aplicação.
+O Patas&Páginas é uma aplicação web focada no gerenciamento unificado de três nichos de negócio distintos, mas integrados: **cafeteria, livraria e papelaria**.
 
-| Arquivo | Responsabilidade |
-|---|---|
-| `__init__.py` | Marca o diretório como um pacote Python. Também pode ser usado para configurar o Celery ou outros serviços globais na inicialização. |
-| `settings.py` | Centraliza **todas as configurações** do projeto: banco de dados, apps instalados, middlewares, arquivos estáticos, idioma, fuso horário, e variáveis de ambiente. |
-| `urls.py` | Define o **roteador principal** da aplicação. Agrega e delega as rotas de cada app através de `include()`, funcionando como o ponto de entrada de todas as URLs. |
-| `wsgi.py` | Interface de comunicação entre o Django e servidores web compatíveis com **WSGI** (ex: Gunicorn, uWSGI). Usado em ambientes de produção tradicionais. |
-| `asgi.py` | Interface de comunicação para servidores compatíveis com **ASGI** (ex: Daphne, Uvicorn). Necessário para suporte a WebSockets e comunicação assíncrona. |
+- **Problema que resolve:** A dificuldade de empresas com estoques híbridos (ex: alimentos perecíveis vs. livros com ISBN) gerenciarem seus diferentes produtos e fluxos de caixa em sistemas ou planilhas separadas.
+- **Público-alvo:** Proprietários e gerentes de estabelecimentos comerciais que combinam serviços de cafeteria com venda de livros e papelaria.
+- **Valor entregue:** Uma solução tecnológica centralizada, rentável e manutenível que otimiza processos comerciais e operacionais, unificando vendas, estoques e controles financeiros em um único sistema, reduzindo desperdícios e aumentando a eficiência.
 
 ---
 
-## 📁 Apps de Negócio — `cafeteria/`, `livraria/`, `papelaria/`
+## ⚠️ Status Atual
 
-Cada um desses diretórios representa um **app Django independente**, responsável por toda a lógica de negócio do seu respectivo módulo. A estrutura interna é idêntica nos três apps:
-
-| Arquivo | Responsabilidade |
-|---|---|
-| `__init__.py` | Marca o diretório como um pacote Python. Geralmente vazio; necessário para que o Django reconheça o app. |
-| `admin.py` | Registra os models no **painel administrativo** do Django (`/admin`). Permite visualizar, criar, editar e excluir registros diretamente pela interface web nativa. |
-| `apps.py` | Contém a **classe de configuração** do app (nome, label, configurações específicas). É referenciado em `INSTALLED_APPS` no `settings.py` para registrar o app no projeto. |
-| `models.py` | Define as **entidades de banco de dados** (tabelas) usando o ORM do Django. É onde ficam as classes que representam os dados do domínio (ex: `Produto`, `Pedido`, `Livro`, `ItemCafeteria`). |
-| `views.py` | Contém a **lógica de negócio e de apresentação**. As views recebem requisições HTTP, interagem com os models, e retornam respostas (HTML via templates, ou JSON via APIs REST). |
-| `tests.py` | Centraliza os **testes automatizados** do app: testes unitários de models, testes de views, e testes de integração. Executados com `python manage.py test`. |
-| `migrations/` | Pasta gerada automaticamente pelo Django. Armazena o **histórico de alterações do banco de dados** em arquivos versionados, permitindo evoluir o schema com segurança via `makemigrations` e `migrate`. |
+- [x] Em desenvolvimento inicial
+- [ ] MVP
+- [ ] Em produção
+- [ ] Escalando
 
 ---
 
-## ⚙️ Comandos Essenciais
+## 🧠 Arquitetura do Sistema
 
-```bash
-# Criar e aplicar migrações de banco de dados
-python manage.py makemigrations
+### 📦 Visão Geral
+
+- **Frontend:** React (JavaScript) + Vanilla CSS (CSS Modules)
+- **Backend:** Django (API RESTful)
+- **Banco de Dados:** PostgreSQL (Banco único/relacional para garantia ACID)
+- **Deploy:** Docker / VPS na Nuvem
+
+### 🧩 Estrutura de Alto Nível
+
+
+/frontend
+/backend
+/docs
+/docker
+/scripts
+
+
+---
+
+## 🏢 Módulos de Negócio (Estoque Híbrido)
+
+O sistema foi desenhado para lidar com as especificidades de três tipos de estoque, mantendo a consistência em um fluxo unificado de vendas:
+- **Cafeteria (Alimentos):** Focado em controle de insumos e composição de receitas, exigindo controle rígido de perdas e validade de produtos perecíveis.
+- **Livraria:** Gerenciamento baseado em metadados detalhados de publicações como ISBN, editoras, autores, gêneros e edições.
+- **Papelaria:** Controle prático de produtos de revenda padronizados (SKU, marca, cor, modelo e lote).
+
+A convergência ocorre no módulo de **Carrinho de Compras / PDV (Ponto de Venda)** e no **Financeiro**, onde qualquer item - seja ele um livro, um caderno ou gramas de pó de café - é abatido adequadamente no estoque e contabilizado no fluxo de caixa dentro da mesma transação.
+
+---
+## 🛠️ Roadmap de Desenvolvimento
+
+### Fase 1 – Levantamento de Requisitos
+- Definição de regras de negócio
+- Identificação de usuários
+- Casos de uso
+
+### Fase 2 – Arquitetura
+- Definição de stack
+- Modelagem de dados
+- Estrutura de pastas
+
+### Fase 3 – Backend
+- Criação de APIs
+- Autenticação
+- Regras de negócio
+
+### Fase 4 – Frontend (React)
+- Layout base
+- Componentização
+- Integração com API
+
+### Fase 5 – Segurança
+- Autenticação e autorização
+- Proteção contra ataques comuns
+
+### Fase 6 – Testes
+- Testes unitários
+- Testes de integração
+
+### Fase 7 – Deploy
+- CI/CD
+- Build e execução
+- Monitoramento
+
+---
+
+## 📚 Documentação Obrigatória
+
+Durante o desenvolvimento, devem ser documentados:
+
+- Regras de negócio
+- Estrutura de APIs
+- Modelagem do banco
+- Fluxos de usuário
+- Decisões técnicas
+- Padrões de código
+- Processo de deploy
+
+📁 Pasta recomendada:
+
+
+/docs
+  ├── arquitetura.md
+  ├── api.md
+  ├── banco.md
+  ├── decisoes.md
+
+
+---
+
+## 💻 Frontend (React)
+
+### 📂 Estrutura recomendada
+
+
+/src
+  ├── components
+  ├── pages
+  ├── services
+  ├── hooks
+  ├── contexts
+  ├── styles
+
+
+### 🧩 Boas práticas
+
+- Componentes reutilizáveis
+- Separação de lógica e UI
+- Uso de hooks customizados
+- Controle de estado (Context API ou biblioteca)
+
+### 📦 Sugestões de bibliotecas
+
+- React Router
+- Axios
+- React Hook Form
+- Zod/Yup
+- Zustand ou Redux (se necessário)
+
+---
+
+## 🔐 Segurança
+
+### 🔒 Práticas obrigatórias
+
+- Uso de HTTPS
+- Tokens JWT seguros
+- Hash de senhas (bcrypt)
+- Variáveis de ambiente (.env)
+- Validação de entrada
+
+### ⚠️ Proteções essenciais
+
+- SQL Injection
+- XSS
+- CSRF
+- CORS configurado corretamente
+
+### 📌 Dados sensíveis
+
+- Nunca versionar segredos
+- Uso de .env e .env.example
+
+---
+
+## 🗄️ Banco de Dados
+
+### 📌 Estratégia Definida
+
+- Banco Principal e Único: **PostgreSQL**
+
+### 📊 Justificativa
+
+Lidar simultaneamente com estoques diversificados, transações financeiras do PDV e relacionamentos complexos (Livros -> Autores/Editoras; Insumos -> Receitas) exige forte consistência e atomicidade (ACID). A flexibilidade comum de um banco NoSQL para salvar metadados variáveis foi contornada pelo uso de campos nativos estruturados (JSON/JSONB) no PostgreSQL, mantendo total simplicidade na infraestrutura (já que haverá apenas um banco de dados rodando) sem sacrificar a flexibilidade requisitada para gerir o estoque híbrido do sistema.
+
+---
+
+## 🚀 Deploy e Execução
+
+### 📦 Requisitos
+
+- Python 3.x e Node.js instalados
+- Banco de dados configurado
+- Variáveis de ambiente definidas
+
+### ⚙️ Passos
+
+bash
+git clone <repo>
+cd projeto
+# Setup do Backend (Django)
+cd backend
+python -m venv venv
+# No Windows use: venv\Scripts\activate
+source venv/bin/activate
+pip install -r requirements.txt
 python manage.py migrate
-
-# Rodar o servidor de desenvolvimento
 python manage.py runserver
 
-# Criar superusuário para acessar o painel admin
-python manage.py createsuperuser
+# Em outro terminal - Setup do Frontend (React)
+cd ../frontend
+npm install
+npm run dev
 
-# Executar os testes automatizados
-python manage.py test
 
-# Coletar arquivos estáticos para produção
-python manage.py collectstatic
-```
+### 🐳 Docker 
 
----
+bash
+docker-compose up --build
 
-## 🧱 Tecnologias Utilizadas
-
-- **Python 3.x**
-- **Django** — Framework web principal
-- **SQLite** (desenvolvimento) / **PostgreSQL** (recomendado para produção)
 
 ---
 
-## 🚀 Como Executar o Projeto
+## 🔄 CI/CD 
 
-1. **Clone o repositório**
-   ```bash
-   git clone <url-do-repositorio>
-   cd backend
-   ```
+- Build automático
+- Testes automáticos
+- Deploy automático
 
-2. **Crie e ative o ambiente virtual**
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # Linux/macOS
-   .venv\Scripts\activate     # Windows
-   ```
-
-3. **Instale as dependências**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Aplique as migrações**
-   ```bash
-   python manage.py migrate
-   ```
-
-5. **Inicie o servidor**
-   ```bash
-   python manage.py runserver
-   ```
-
-6. Acesse em: [http://localhost:8000]
+Ferramentas:
+- GitHub Actions
+- GitLab CI
+- Jenkins
 
 ---
 
-## 📌 Observações
+## 🌍 Ambientes
 
-- Cada app pode ter seu próprio arquivo `urls.py` para organizar as rotas localmente, sendo incluído no roteador principal em `patas_paginas/urls.py`.
-- Recomenda-se utilizar variáveis de ambiente (ex: via `python-decouple` ou `django-environ`) para proteger dados sensíveis como `SECRET_KEY` e credenciais de banco de dados.
-- Em produção, defina `DEBUG = False` e configure corretamente o `ALLOWED_HOSTS` no `settings.py`.
+- Desenvolvimento
+- Homologação
+- Produção
+
+Cada ambiente deve ter:
+- Configurações próprias
+- Banco separado
+- Variáveis de ambiente
+
+---
+
+## 📈 Monitoramento
+
+- Logs estruturados
+- Alertas de erro
+- Métricas de uso
+
+Sugestões:
+- Sentry
+- Grafana
+- Prometheus
+
+---
+
+## 🧪 Testes
+
+- Unitários
+- Integração
+- End-to-end
+
+---
+
+## 📦 Versionamento
+
+- Git Flow ou trunk-based
+- Commits semânticos
+
+---
+
+## 📌 Boas Práticas Gerais
+
+- Código limpo
+- Documentação atualizada
+- Revisão de código (PR)
+- Padronização
+
+---
+
+## 📄 Licenciamento
+
+**Licença Proprietária / Comercial**
+Sendo o Patas&Páginas um sistema desenvolvido com fins lucrativos voltado a comercialização profissional B2B, todos os direitos são reservados aos autores. O projeto **não possui licença de código aberto (Open Source)**. É estritamente proibida a cópia, distribuição, modificação, engenharia reversa ou o uso comercial não autorizado do código-fonte e de suas documentações atreladas sem o consentimento explícito dos detentores da propriedade intelectual.
+
+---
+
+## 👥 Contribuição
+
+Trata-se de um projeto de software fechado (Closed Source). Contribuições externas de terceiros não são aceitas e o desenvolvimento do produto base é restrito à equipe técnica listada como oficial abaixo e pessoas previamente autorizadas em contrato.
+
+---
+
+## 📞 Contato
+
+Responsáveis pelo projeto:
+- Nomes: Eduardo Leite Braz e Matheus Ferreira de Souza
+- Email: deveduardobz@gmail.com e mmmatheus.fsouza@gmail.com
