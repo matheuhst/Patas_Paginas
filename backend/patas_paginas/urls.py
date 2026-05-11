@@ -24,4 +24,5 @@ urlpatterns = [
     path('api/livros/', include('livraria.urls')),
     # Quando começar com /api/cafe/, vai para o app cafeteria
     path('api/cafe/', include('cafeteria.urls')),
+    path('api/', include('core.urls'))
 ]
