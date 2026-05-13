@@ -17,6 +17,7 @@ mas sem porta de entrada.
 #   PUT    /produtos/1/   → edita o produto com id=1
 #   DELETE /produtos/1/   → apaga o produto com id=1
 # Sem o Router, você teria que escrever cada uma dessas 5 rotas manualmente.
+# pyrefly: ignore [missing-import]
 from rest_framework.routers import DefaultRouter
 
 # Importa a ViewSet que criamos em core/views.py.

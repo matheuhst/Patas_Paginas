@@ -22,6 +22,7 @@ Com o DRF, uma ViewSet faz tudo isso numa única classe.
 #
 # Todas essas 5 ações já vêm implementadas. Você só precisa dizer
 # DE ONDE buscar os dados (queryset) e COMO traduzi-los (serializer).
+# pyrefly: ignore [missing-import]
 from rest_framework import viewsets
 
 # Importa o model Produto.
