@@ -27,6 +27,7 @@ você sabe que o serializer dele está aqui do lado.
 # "ler" um Model do Django e gerar automaticamente os campos
 # de tradução (string, número, data, etc.) sem você precisar
 # declarar cada um manualmente.
+# pyrefly: ignore [missing-import]
 from rest_framework import serializers
 
 # Importa o model Produto que criamos em core/models.py.
