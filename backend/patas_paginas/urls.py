@@ -21,8 +21,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Quando a URL começar com /api/livros/, vai para o app livraria
-    path('api/livros/', include('livraria.urls')),
-    # Quando começar com /api/cafe/, vai para o app cafeteria
-    path('api/cafe/', include('cafeteria.urls')),
+    path('api/', include('livraria.urls')),
+    path('api/', include('cafeteria.urls')),
     path('api/', include('core.urls'))
 ]
