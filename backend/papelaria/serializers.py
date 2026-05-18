@@ -1,11 +1,13 @@
 from rest_framework import serializers
 from core.serializers import ProdutoSerializer
 from .models import Papelaria
+from core.models import Produto
 
 class PapelariaSerializer(serializers.ModelSerializer):
-    # O ProdutoSerializer traz as informações base (nome, preco)
-    produto = ProdutoSerializer()
+    produto_detalhe = ProdutoSerializer(source='produto', read_only=True)
+
+    produto = serializers.PrimaryKeyRelatedField(queryset=Produto.objects.all())
 
     class Meta:
         model = Papelaria
-        fields = '__all__'
+        fields = ['id', 'produto', 'produto_detalhe', 'marca', 'cor']

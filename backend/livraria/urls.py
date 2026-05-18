@@ -1,18 +1,13 @@
-<<<<<<< HEAD
 """
 Passo 8 — Conectar as URLs (O Roteador)
 
 Este arquivo existe porque o Django precisa saber:
-"Quando alguém acessar /api/produtos/, qual código deve responder?"
+"Quando alguém acessar /api/livros/, qual código deve responder?"
 
 Sem este arquivo, seus Serializers e ViewSets existem mas são invisíveis —
 ninguém consegue acessá-los pela web. É como ter uma loja montada
 mas sem porta de entrada.
 """
-
-=======
-
->>>>>>> eff2be4fc3a68b42c9554a740da127444faa6e37
 # DefaultRouter é um "gerador automático de URLs" do DRF(Django Rest Framework).
 # Ele olha pra uma ViewSet e cria sozinho todas as rotas REST:
 #   GET    /produtos/     → lista todos os produtos
@@ -24,45 +19,26 @@ mas sem porta de entrada.
 # pyrefly: ignore [missing-import]
 from rest_framework.routers import DefaultRouter
 
-<<<<<<< HEAD
-# Importa a ViewSet que criamos em core/views.py.
-# O ponto (.) significa "do mesmo pacote/app" — ou seja, do próprio core.
-from .views import ProdutoViewSet
-=======
 # Importa a ViewSet que criamos em livraria/views.py.
-# O ponto (.) significa "do mesmo pacote/app" — ou seja, do próprio core.
+# O ponto (.) significa "do mesmo pacote/app" — ou seja, da própria livraria.
 from .views import LivroViewSet
->>>>>>> eff2be4fc3a68b42c9554a740da127444faa6e37
 
 # Cria uma instância do Router.
 # Pense nele como um "despachante" que vai organizar todas as rotas da app core.
 router = DefaultRouter()
 
 # Registra a ProdutoViewSet no router.
-<<<<<<< HEAD
-# O primeiro argumento r'produtos' é o prefixo da URL.
-# Como no patas_paginas/urls.py nós já definimos path('api/', include('core.urls')),
-# a URL final será: /api/ + produtos/ = /api/produtos/
-=======
 # O primeiro argumento r'livros' é o prefixo da URL.
 # Como no patas_paginas/urls.py nós já definimos path('api/', include('livraria.urls')),
 # a URL final será: /api/ + livros/ = /api/livros/
->>>>>>> eff2be4fc3a68b42c9554a740da127444faa6e37
 #
 # O r'' antes da string significa "raw string" — diz ao Python para não interpretar
 # caracteres especiais como \n. É uma boa prática em padrões de URL.
 #
-<<<<<<< HEAD
-# Nota: NÃO usamos basename='produto' aqui porque a ViewSet já tem
-# queryset = Produto.objects.all() definido. O DRF infere o nome automaticamente.
-# O basename só é necessário quando a ViewSet não tem queryset (casos avançados).
-router.register(r'produtos', ProdutoViewSet)
-=======
 # Nota: NÃO usamos basename='livro' aqui porque a ViewSet já tem
 # queryset = Livro.objects.all() definido. O DRF infere o nome automaticamente.
 # O basename só é necessário quando a ViewSet não tem queryset (casos avançados).
 router.register(r'livros', LivroViewSet)
->>>>>>> eff2be4fc3a68b42c9554a740da127444faa6e37
 
 # Esta é a linha mais importante do arquivo.
 # O Django, ao carregar qualquer arquivo de URLs, procura uma variável chamada

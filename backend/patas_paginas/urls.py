@@ -23,5 +23,10 @@ urlpatterns = [
     # Quando a URL começar com /api/livros/, vai para o app livraria
     path('api/', include('livraria.urls')),
     path('api/', include('cafeteria.urls')),
-    path('api/', include('core.urls'))
+
+    #fazer com que a rota específica venha antes
+    path('api/', include('papelaria.urls')),
+
+    #da rota genérica onde acontece o "buraco negro"
+    path('api/', include('core.urls')),
 ]
