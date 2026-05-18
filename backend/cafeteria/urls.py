@@ -1,6 +1,9 @@
-from django.urls import path
-from . import views
+# pyrefly: ignore [missing-import]
+from rest_framework.routers import DefaultRouter
+from .views import CafeInsumoViewSet, ReceitaItemViewSet, ReceitaDiretaAoClienteViewSet
 
-urlpatterns = [
-    path("home/", views.home_cafeteria)
-]
+router = DefaultRouter()
+router.register(r'cafeinsumos', CafeInsumoViewSet)
+router.register(r'receitaitens', ReceitaItemViewSet)
+router.register(r'receitas', ReceitaDiretaAoClienteViewSet)
+urlpatterns = router.urls
